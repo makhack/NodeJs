@@ -5,7 +5,7 @@ var path = require('path'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     morgan = require('morgan'),
-    methodOverride = require('methode-override'),
+    methodOverride = require('method-override'),
     errorHandler = require('errorhandler');
     
     module.exports = function(app){
@@ -15,11 +15,12 @@ var path = require('path'),
         // .handlebars à ce moteur
         app.engine('handlebars', exhbs.create( { 
             defaultLayout: 'main',
-            layoutsDir: app.get('views') + '/layouts',
-            partialsDir: [app.get('views') + '/partials']
+            layoutsDir: app.get('views') + '/layouts',      // ici je peu définir directement un repertoir 
+            partialsDir: [app.get('views') + '/partials']   // au cas ou plusieur
          }).engine)
          // on selectionne ce moteur
          app.set('view engine', 'handlebars');
+         
          // morgan est un filtre (middleware) pour le logging du serveur
          app.use(morgan('dev'));
          
@@ -29,7 +30,7 @@ var path = require('path'),
          
          app.use(cookieParser('ma-valeur-secrete'));
          
-         route(app);// mise en place des routes
+         routes(app);// mise en place des routes
          
          //serveur de contenu statique (.js, img, css, html ...)
          app.use('/public/', express.static(path.join(__dirname, '../public')));
@@ -38,4 +39,6 @@ var path = require('path'),
          if('development' === app.get('env')){
              app.use(errorHandler());
          }
+         
+         return app;
     }
