@@ -6,7 +6,8 @@ var path = require('path'),
     cookieParser = require('cookie-parser'),
     morgan = require('morgan'),
     methodOverride = require('method-override'),
-    errorHandler = require('errorhandler');
+    errorHandler = require('errorhandler')
+    multer = require('multer');
     
     module.exports = function(app){
         //configuration du moteur de vue handlerbars
@@ -23,6 +24,15 @@ var path = require('path'),
          
          // morgan est un filtre (middleware) pour le logging du serveur
          app.use(morgan('dev'));
+         
+         // mise en place de la gestion simplifiée des formulaires et url encodés
+         app.use(bodyParser.urlencoded({'extend' : true}));
+         
+         //mise en place de multer, qui gere l'upload des fichiers en provenance
+         // d'un champ de type file.
+         // il peu gerer des uploads multiple.
+         // le paramettre dest lui indique ou placer els fichiers temporaires uploadés
+         app.use(multer({dest: path.join(__dirname, '../tmp/upload')}).any());
          
          // mise en place de method-override ( gestion des requettes put, delete, etc)
          // même si le navigateur ne le supporte pas
