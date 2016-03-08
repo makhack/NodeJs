@@ -1,0 +1,19 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">liste des taches</h3>
+    </div>
+    <div class="panel-body">
+        {{#each taches}}
+            <div class="col-md-4 text-center" style="padding-bottom: 1em;">
+                <p>
+                    titre: {{titre}} <br />
+                    auteur: {{auteur}} <br />
+                    urgence: {{urgence}} <br />
+                </p>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+
+
