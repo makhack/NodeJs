@@ -7,14 +7,23 @@ module.exports = {
       //res.send(200, "<h2>bonjour depuis index</h2>");
       // affichage de la vue index avec pour l'instant un viewModel vide...
       
-      var viewModel = {
+      /*var viewModel = {
         images: ImageModel.images,
-      };
-      sidebar(viewModel, function(err, viewModel) {
-         if (err) throw err;
-         res.render('index', viewModel);
-      });
+      };*/
       
-  } 
-   
+      // on aura la liste de nos images + un formulaire pour uploader
+      var viewModel = {
+          image: []
+      };
+      // requete toutes les images en triant par odre décroissant du timestamp
+      ImageModel.find({},{},{sort: {timestamp: -1}}, function(err,images){
+         if(err) throw err;
+         
+         viewModel.images = images;
+         sidebar(viewModel, function(err,viewModel){
+             if(err) throw err;
+             res.render('index', viewModel);
+         });
+      });
+  }
 };

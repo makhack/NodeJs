@@ -12,6 +12,7 @@ pids
 lib-cov
 
 tmp
+public
 
 # Coverage directory used by tools like istanbul
 coverage
