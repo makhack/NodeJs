@@ -1,2 +1,2 @@
 bonjour monde
-deuis data.txt
+depuis data.txt
