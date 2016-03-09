@@ -3,7 +3,6 @@ var sidebar = require('../helpers/sidebar'),
 
 module.exports = {
     index : function(req,res){
-        
         var viewModel = {
             images: ImageModel.images
         };
@@ -11,9 +10,9 @@ module.exports = {
         sidebar(viewModel, function(err, viewModel){
             if(err) throw err;
             
-            //res3send('<h1> BONJOUR DEPUIS INDEX</h1>)
+            //res.send('<h1> BONJOUR DEPUIS INDEX</h1>)
             // affichage de la vue index avec pour l'instant un viewModel vide ...
             res.render('index', viewModel);
         });
     }
-};
+}; 

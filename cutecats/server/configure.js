@@ -17,7 +17,12 @@ var path = require('path'),
         app.engine('handlebars', exhbs.create( { 
             defaultLayout: 'main',
             layoutsDir: app.get('views') + '/layouts',      // ici je peu définir directement un repertoir 
-            partialsDir: [app.get('views') + '/partials']   // au cas ou plusieur
+            partialsDir: [app.get('views') + '/partials'],   // au cas ou plusieur
+            helpers: {
+                timeago: function(timestamp){
+                    return moment(timestamp).startOf('minute').fromNow();
+                }
+            }
          }).engine)
          // on selectionne ce moteur
          app.set('view engine', 'handlebars');
