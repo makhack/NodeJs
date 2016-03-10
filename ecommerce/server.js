@@ -5,7 +5,7 @@ var express = require('express'),
 var app = express();
 
 app.set('port', process.env.PORT || 8081);
-app.set('views', __dirname + 'views');
+app.set('views', __dirname + '/views');
 
 app = config(app);
 

@@ -22,6 +22,8 @@ module.exports = function(app) {
         }       
     }).engine);
     
+    app.set('view engine', 'handlebars');
+    
     app.use(morgan('dev'));
     
     app.use(bodyParser.urlencoded({'extends' : true}));
