@@ -1,4 +1,7 @@
-var stats = require('./stats');
+var stats = require('./stats'),
+    Images = require('./images'),
+    Comments = require('./comments'),
+    async = require('async');
 
 module.exports = function(viewModel, callback) {
     // l'appel a sidebar collecteras les données nécéssaire à l'affichage
@@ -8,11 +11,34 @@ module.exports = function(viewModel, callback) {
     //  3) les derniers commentaires
     // a terme, nous utiliserons async pour requeter ces informations en
     // parallele, pour l'instant, un simple callback
-    // par exemple: index -> sidebar(viewModel, callback) -> callback(render....)  
-    stats(function(err, result) {
+    // par exemple: index -> sidebar(viewModel, callback) -> callback(render....)
+    
+    async.parallel([
+        function(next) {
+            stats(next);
+        },
+        function(next){
+            Images.popular(next);
+        },
+        function(next){
+            Comments.newest(next);
+        }
+    ], function(err, results){
+        // result[0] -> retour de stats
+        // results[1] -> retour de Images.popular
         viewModel.sidebar = {
-            stats: result
+            stats: results[0],
+            popular: results[1],
+            newest: results[2]
         };
         callback(err, viewModel);
-    });
+    })
+    
+    
+    // stats(function(err, result) {
+    //     viewModel.sidebar = {
+    //         stats: result
+    //     };
+    //     callback(err, viewModel);
+    // });
 };

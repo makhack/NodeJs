@@ -1,0 +1,20 @@
+<div class ="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"> Most Popular Cats </h3>
+    </div>
+    <div class="panel-body">
+        {{#each sidebar.newest}}
+            <li class="media">
+                <a class="pull-left" href="/images/{{ image.uniqueId }}">
+                    <img class="media-object" wdith="45" height="45" src="/public/uploads/{{ image.filename }}"/>
+                </a>
+                <div class="media-body">
+                    {{ comment }}
+                    <br/>
+                    <strong class="medio-heading">{{ name }}</strong>
+                    <small class="text-muted">{{ timeago timestamp }}</small>
+                </div>
+            </li>
+        {{/each}}
+    </div>
+</div>

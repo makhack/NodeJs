@@ -7,7 +7,8 @@ var CommentSchema = new Schema({
     name:       {type: String}, 
     gravatar:   {type: String},
     comment:    {type: String},
-    timestamp:  {type: Date, default : Date.now}
+    timestamp:  {type: Date, default : Date.now},
+    image_id:   {type:String}
 });
     
 CommentSchema.virtual('uniqueId')
