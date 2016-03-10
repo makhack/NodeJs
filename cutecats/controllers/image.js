@@ -116,7 +116,6 @@ module.exports = {
                  if(err) throw err;
                  res.redirect("/images/" + image.uniqueId + "#" + comment._id); 
              });
-             
          }else{
              res.redirect('/');
          }
@@ -137,7 +136,6 @@ module.exports = {
                 });
             })
         })
-
     });      
   }
 };

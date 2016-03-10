@@ -10,7 +10,7 @@ var CommentSchema = new Schema({
     timestamp:  {type: Date, default : Date.now},
     image_id:   {type:String}
 });
-    
+
 CommentSchema.virtual('uniqueId')
             .set(function(){
                 this._image = image;
