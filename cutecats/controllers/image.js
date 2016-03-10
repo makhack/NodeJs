@@ -121,6 +121,23 @@ module.exports = {
              res.redirect('/');
          }
       });
+  },
+  remove : function(req, res){
+    Models.Image.findOne({ filename : { $regex: req.params.image_id }}, function(err, image){
+        if (err) throw err;
+        fs.unlink(path.resolve('.public/uploads' + image.filename), function(err){
+            Models.Comment.remove({ image_id: image._id}, function(err){
+                if(err) throw err;
+                image.remove(function(err){
+                    if(!err){
+                        res.json(true);
+                    }else{
+                        res.json(false);
+                    }
+                });
+            })
+        })
+
+    });      
   }
-  
 };
