@@ -17,14 +17,15 @@ module.exports = function(viewModel, callback) {
         function(next) {
             stats(next);
         },
-        function(next){
+        function(next) {
             Images.popular(next);
         },
-        function(next){
+        function(next) {
             Comments.newest(next);
         }
-    ], function(err, results){
-        // result[0] -> retour de stats
+    ], function (err, results) {
+        if (err) throw err;
+        // results[0] -> retour de stats
         // results[1] -> retour de Images.popular
         viewModel.sidebar = {
             stats: results[0],
@@ -32,13 +33,6 @@ module.exports = function(viewModel, callback) {
             newest: results[2]
         };
         callback(err, viewModel);
-    })
-    
-    
-    // stats(function(err, result) {
-    //     viewModel.sidebar = {
-    //         stats: result
-    //     };
-    //     callback(err, viewModel);
-    // });
+    });
+      
 };
